@@ -23,7 +23,14 @@ class Main {
             println("Введите команду:")
 
             val userCommand = readln()
-            parseCommand(userCommand)
+            val processingResult = runCatching {
+                processCommand(userCommand)
+            }
+
+            if (processingResult.isFailure) {
+                println("Из-за ошибки программа вынужденно аварийно завершиться")
+                break
+            }
 
             if (userCommand == "exit") {
                 println("Программа завершается")
@@ -33,7 +40,7 @@ class Main {
         } while (true)
     }
 
-    private fun parseCommand(userInputCommand: String) {
+    private fun processCommand(userInputCommand: String) {
         val parts = userInputCommand.lowercase().split(" ")
 
         when (parts.first()) {
@@ -42,6 +49,7 @@ class Main {
             "set" -> processSet(parts[1])
             "start" -> processStart()
             "stop" -> processStop()
+            else -> println("Неизвестная команда. Попробуйте повторить.")
         }
     }
 

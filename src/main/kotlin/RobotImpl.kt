@@ -50,6 +50,12 @@ class RobotImpl(
         println("STOP")
     }
 
+    /**
+     * Расчет новой позиции. Строим треугольник на координатной плоскости
+     * Зная угол поворота [Angle] и [moveMeters] сперва через синус угла находим длину прилежащей стороны (ось X)
+     * После чего по теореме Пифагора находим третью сторону (ось Y)
+     * И складываем полученные значения с текущими координатами
+     */
     private fun calcNewPosition(currentPosition: Pair<X, Y>, moveMeters: Float): Pair<X, Y> {
         val angle = currentRobot.angle.value
         if (angle == 0) {
