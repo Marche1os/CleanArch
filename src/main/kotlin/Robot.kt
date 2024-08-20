@@ -6,7 +6,7 @@ interface Robot {
     /**
      * Команда "Двигаться вперед на [meters] метров"
      */
-    fun move(meters: Int)
+    fun move(meters: Float)
 
     /**
      * Команда "Повернуть на [angle] градусов"

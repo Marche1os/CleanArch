@@ -1,39 +1,72 @@
+import types.Angle
+import types.CleaningDevice
+import types.X
+import types.Y
+
 fun main() {
-    println("Вводите последовательно команды одна за другой. Для завершения программы введите exit")
-
-    do {
-        println("Введите команду:")
-
-        val userCommand = readln()
-        val parsedCommand = parseCommand(userCommand)
-
-        if (userCommand == "exit") {
-            println("Программа завершается")
-            break
-        } else if (parsedCommand is Commands.Invalid) {
-            println("Программа аварийно завершается")
-            break
-        }
-
-        println("Команда: $parsedCommand")
-
-    } while (true)
+    Main().startProgram()
 }
 
-private fun parseCommand(userCommand: String): Commands {
-    val parts = userCommand.split(" ")
-    require(parts.size >= 0 && parts.size < 3) {
-        "Программа аварийно завершилась"
+class Main {
+    val robot: Robot = RobotImpl(
+        RobotData(
+            position = X(0f) to Y(0f),
+            angle = Angle(0),
+            cleaningDevice = CleaningDevice.WATER,
+        )
+    )
+
+    fun startProgram() {
+        println("Вводите последовательно команды одна за другой. Для завершения программы введите exit")
+
+        do {
+            println("Введите команду:")
+
+            val userCommand = readln()
+            parseCommand(userCommand)
+
+            if (userCommand == "exit") {
+                println("Программа завершается")
+                break
+            }
+
+        } while (true)
     }
 
-    val command = when (userCommand.split(" ").first().lowercase()) {
-        "stop" -> Commands.Stop
-        "start" -> Commands.Start
-        "turn" -> Commands.Turn(parts[1].toInt())
-        "set" -> Commands.Set(CleaningDevice.valueOf(parts[1]))
-        "move" -> Commands.Move(parts[1].toInt())
-        else -> Commands.Invalid
+    private fun parseCommand(userInputCommand: String) {
+        val parts = userInputCommand.lowercase().split(" ")
+
+        when (parts.first()) {
+            "move" -> processMove(parts[1])
+            "turn" -> processTurn(parts[1])
+            "set" -> processSet(parts[1])
+            "start" -> processStart()
+            "stop" -> processStop()
+        }
     }
 
-    return command
+    private fun processMove(value: String) {
+        val meters = value.toFloat()
+        robot.move(meters)
+    }
+
+    private fun processTurn(value: String) {
+        robot.turn(Angle(value.toInt()))
+    }
+
+    private fun processSet(value: String) {
+        val device = CleaningDevice.entries
+            .find { it.value == value }
+            ?: CleaningDevice.WATER
+
+        robot.set(device)
+    }
+
+    private fun processStart() {
+        robot.start()
+    }
+
+    private fun processStop() {
+        robot.stop()
+    }
 }
