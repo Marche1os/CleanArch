@@ -1,6 +1,6 @@
 ```kotlin
 class RobotProgram {
-    private lateinit var cleanerRobot: CleanerRobot
+    private lateinit var cleanerRobot: .CleanerRobot
     private lateinit var commandParser: CommandParser
 
     fun main() {
@@ -12,7 +12,7 @@ class RobotProgram {
             val userCommand = readln()
             val processingResult = runCatching {
                 commandParser.parse(userCommand)
-            }.onSuccess { command -> cleanerRobot.performCommand(command) }
+            }.onSuccess { command -> CleanerRobot.performCommand(command) }
 
             if (processingResult.isFailure) {
                 println("Из-за ошибки программа вынужденно аварийно завершиться")
@@ -28,7 +28,7 @@ class RobotProgram {
     }
 
     private fun init() {
-        cleanerRobot = CleanerRobotImpl(
+        cleanerRobot = .CleanerRobotImpl(
             robotData = RobotData(
                 position = Position(
                     x = X(0f),
@@ -122,15 +122,15 @@ value class Angle(val value: Int) {
     }
 }
 
-interface CleanerRobot {
+interface .CleanerRobot {
 
     fun performCommand(command: RobotCommand)
 }
 
-class CleanerRobotImpl(
+class .CleanerRobotImpl(
     robotData: RobotData,
     private val movement: RobotMovement,
-) : CleanerRobot {
+) : .CleanerRobot {
     private var currentRobot = robotData
 
     override fun performCommand(command: RobotCommand) {

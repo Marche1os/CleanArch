@@ -9,6 +9,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/robot_data" />
+            <option value="$PROJECT_DIR$/robot_programm" />
           </set>
         </option>
       </GradleProjectSettings>
