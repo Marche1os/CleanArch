@@ -5,3 +5,5 @@ rootProject.name = "untitled"
 include("robot_data")
 include("robot_programm")
 include("robot_command_parser")
+include("cleaner_api")
+include("cleaner_impl")

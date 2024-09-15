@@ -5,10 +5,12 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="" />
+        <option name="gradleJvm" value="openjdk-19" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/cleaner_api" />
+            <option value="$PROJECT_DIR$/robot_command_parser" />
             <option value="$PROJECT_DIR$/robot_data" />
             <option value="$PROJECT_DIR$/robot_programm" />
           </set>

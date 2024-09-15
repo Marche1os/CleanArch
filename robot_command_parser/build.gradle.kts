@@ -10,6 +10,8 @@ repositories {
 }
 
 dependencies {
+    implementation(project(":robot_data"))
+
     testImplementation(kotlin("test"))
 }
 
