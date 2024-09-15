@@ -10,6 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/cleaner_api" />
+            <option value="$PROJECT_DIR$/cleaner_impl" />
             <option value="$PROJECT_DIR$/robot_command_parser" />
             <option value="$PROJECT_DIR$/robot_data" />
             <option value="$PROJECT_DIR$/robot_programm" />
