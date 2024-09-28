@@ -44,7 +44,7 @@ fun move(distance: Double): State<RobotState, Result> = State { state ->
 
     val newState = state.copy(position = newPosition)
 
-    println("POS $newPosition")
+    newState.logString("POS $newPosition")
 
     Result.Success to newState
 }
@@ -53,7 +53,7 @@ fun turn(angle: Double): State<RobotState, Result> = State { state ->
     val newDirection = (state.direction + angle) % 360
     val newState = state.copy(direction = newDirection)
 
-    println("ANGLE $newDirection")
+    newState.logString("ANGLE $newDirection")
 
     Result.Success to newState
 }
@@ -61,7 +61,7 @@ fun turn(angle: Double): State<RobotState, Result> = State { state ->
 fun setCleaningDevice(cleaningDevice: RobotState.CleaningDevice): State<RobotState, Result> = State { state ->
     val newState = state.copy(mode = cleaningDevice)
 
-    println("STATE ${cleaningDevice.value}")
+    newState.logString("STATE ${cleaningDevice.value}")
 
     Result.Success to newState
 }
@@ -69,7 +69,7 @@ fun setCleaningDevice(cleaningDevice: RobotState.CleaningDevice): State<RobotSta
 fun start(): State<RobotState, Result> = State { state ->
     val newState = state.copy(deviceState = RobotState.DeviceState.ON)
 
-    println("START WITH ${state.mode.value}")
+    newState.logString("START WITH ${state.mode.value}")
 
     Result.Success to newState
 }
@@ -77,7 +77,7 @@ fun start(): State<RobotState, Result> = State { state ->
 fun stop(): State<RobotState, Result> = State { state ->
     val newState = state.copy(deviceState = RobotState.DeviceState.OFF)
 
-    println("STOP")
+    newState.logString("STOP")
 
     Result.Success to newState
 }
@@ -99,6 +99,10 @@ data class RobotState(
     enum class DeviceState {
         ON,
         OFF
+    }
+
+    fun logString(text: String) {
+        println(text)
     }
 }
 
